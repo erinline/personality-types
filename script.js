@@ -310,7 +310,6 @@ function showQuestion() {
     rightLabel.textContent = question.rightLabel;
     
     // Set slider value if answer exists
-    console.log(answers[currentQuestion]);
     if (answers[currentQuestion] !== undefined) {
         answerScale.value = answers[currentQuestion];
     } else {

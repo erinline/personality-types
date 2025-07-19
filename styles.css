@@ -78,28 +78,34 @@ body {
     margin-right: auto;
 }
 
-.features {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 3rem;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.feature {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    border-radius: 12px;
-    background: rgba(102, 126, 234, 0.1);
-    min-width: 150px;
+.feature-list li {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1rem;
 }
 
-.feature-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+.check-icon {
+  display: inline-block;
+  width: 1.5rem;
+  color: var(--gradient-start, #1abc9c);
+  font-weight: bold;
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
 }
 
 .primary-btn {
