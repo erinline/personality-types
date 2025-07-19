@@ -2,26 +2,12 @@
 let currentQuestion = 0;
 let answers = [];
 let scores = {
-    spontaneous: 0,
-    social: 0,
-    thinking: 0,
-    adventure: 0,
-    leadership: 0,
-    learning: 0,
-    communication: 0,
-    stress: 0,
-    motivation: 0,
-    organization: 0,
-    feedback: 0,
-    pace: 0,
-    conflict: 0,
-    decisions: 0,
-    energy: 0,
-    explanation: 0,
-    rules: 0,
-    conversation: 0,
-    comfort: 0,
-    role: 0
+    depth: 0,
+    breadth: 0,
+    interacting: 0,
+    doing: 0,
+    light: 0,
+    serious: 0
 };
 
 // DOM Elements
@@ -57,7 +43,7 @@ function startTest() {
 const overlay = document.querySelector('.slider-reveal-overlay');
 
 function updateRevealOverlay(value) {
-  const percent = ((7 - value) / 6) * 100;
+  const percent = ((5 - value) / 4) * 100;
   overlay.style.width = `${percent}%`;
 }
 
@@ -71,7 +57,7 @@ function showQuestion() {
     if (answers[currentQuestion] !== undefined) {
         answerScale.value = answers[currentQuestion];
     } else {
-        answerScale.value = 4; // Default to neutral
+        answerScale.value = 3; // Default to neutral
     }
     updateRevealOverlay(answerScale.value);
     
@@ -104,51 +90,44 @@ function nextQuestion() {
     } else {
         // Test complete
         calculateResults();
+        const rankedTypes = determinePersonalityType();
+        displayPersonalityResult(rankedTypes[0].type);
         showResults();
     }
 }
 
 function calculateResults() {
     // Reset scores
-    Object.keys(scores).forEach(key => scores[key] = 0);
-    
-    // Calculate scores based on answers
+    const traitNames = ['doing', 'interacting', 'light', 'serious', 'depth', 'breadth'];
+    traitNames.forEach(trait => scores[trait] = 0);
+
     answers.forEach((answer, index) => {
-        const question = questions[index];
-        const dimension = question.dimension;
-        
-        // Convert 1-7 scale to -3 to +3 scale
-        const score = answer - 4;
-        scores[dimension] += score;
+        const [leftTrait, rightTrait] = questions[index].dimension.split('.');
+
+        const score = answer - 3; // Convert to range -2 to 2
+
+        if (score < 0) {
+            scores[leftTrait] += Math.abs(score);
+        } else if (score > 0) {
+            scores[rightTrait] += score;
+        }
+        // No score change if neutral
     });
-    
-    // Determine personality type based on scores
-    const personalityType = determinePersonalityType();
-    displayPersonalityResult(personalityType);
 }
 
 function determinePersonalityType() {
-    // Calculate aggregate scores for major dimensions
-    const spontaneityScore = (scores.spontaneous + scores.adventure + scores.pace + scores.comfort) / 4;
-    const socialScore = (scores.social + scores.energy + scores.conversation + scores.communication) / 4;
-    const thinkingScore = (scores.thinking + scores.learning + scores.explanation + scores.organization) / 4;
-    const leadershipScore = (scores.leadership + scores.motivation + scores.conflict + scores.role) / 4;
-    const creativityScore = (scores.feedback + scores.decisions + scores.rules + scores.stress) / 4;
-    
-    // Determine personality type based on dominant traits
-    if (spontaneityScore > 1 && leadershipScore > 1) {
-        return "Dynamic Pioneer";
-    } else if (thinkingScore > 1 && socialScore < 0) {
-        return "Analytical Optimizer";
-    } else if (socialScore > 1 && creativityScore > 0) {
-        return "Empathetic Connector";
-    } else if (creativityScore > 1 && spontaneityScore > 0) {
-        return "Creative Visionary";
-    } else if (thinkingScore > 0 && spontaneityScore < 0) {
-        return "Thoughtful Strategist";
-    } else {
-        return "Balanced Harmonizer";
-    }
+    const ranked = Object.entries(personalityTypes).map(([typeName, typeData]) => {
+        let score = 0;
+
+        typeData.traits.forEach(trait => {
+            score += scores[trait] || 0;
+        });
+
+        return { type: typeName, score };
+    });
+
+    ranked.sort((a, b) => b.score - a.score); // highest match first
+    return ranked;
 }
 
 function displayPersonalityResult(typeName) {
@@ -164,19 +143,19 @@ function displayPersonalityResult(typeName) {
     const traitBars = document.getElementById('trait-bars');
     traitBars.innerHTML = '';
     
-    Object.entries(type.traits).forEach(([trait, score]) => {
+    type.traits.forEach(trait => {
+        const score = scores[trait] || 0;
         const traitBar = document.createElement('div');
         traitBar.className = 'trait-bar';
         traitBar.innerHTML = `
             <span class="trait-name">${trait}</span>
             <div class="trait-progress">
-                <div class="trait-reveal-overlay" style="width: ${100 - score}%;"></div>
+                <div class="trait-reveal-overlay" style="width: ${100 - (score * questions.length)}%;"></div>
             </div>
-            <span class="trait-score">${score}%</span>
+            <span class="trait-score">${score}</span>
         `;
         traitBars.appendChild(traitBar);
     });
-
     
     // Display strengths
     const strengthsList = document.getElementById('strengths-list');
@@ -187,6 +166,91 @@ function displayPersonalityResult(typeName) {
         li.textContent = strength;
         strengthsList.appendChild(li);
     });
+
+    // Display trait chart
+    const ctx = document.getElementById('trait-chart').getContext('2d');
+
+    // Destroy old chart if it exists
+    if (window.traitChart) window.traitChart.destroy();
+
+    const traitLabels = Object.keys(scores);
+    const traitValues = traitLabels.map(trait => scores[trait]);
+
+    window.traitChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+        labels: traitLabels,
+        datasets: [{
+            label: 'Your Trait Profile',
+            data: traitValues,
+            fill: true,
+            backgroundColor: 'rgba(26, 188, 156, 0.2)', // translucent teal
+            borderColor: '#1abc9c',
+            pointBackgroundColor: '#1abc9c',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#1abc9c'
+        }]
+    },
+    options: {
+        responsive: true,
+        animation: {
+        duration: 800,
+        easing: 'easeOutQuart'
+        },
+        plugins: {
+        legend: { display: false },
+        tooltip: {
+            backgroundColor: '#333',
+            titleFont: { weight: 'bold' },
+            callbacks: {
+                label: ctx => `${ctx.label}: ${ctx.formattedValue}`
+            }
+        }
+        },
+        scales: {
+        r: {
+            beginAtZero: true,
+            suggestedMax: 5, // or 10 if unnormalized
+            angleLines: {
+            color: 'rgba(0, 0, 0, 0.05)'
+            },
+            grid: {
+            color: 'rgba(0, 0, 0, 0.05)'
+            },
+            pointLabels: {
+            font: {
+                size: 14,
+                weight: '500'
+            },
+            color: '#444'
+            },
+            ticks: {
+                stepSize: 1,
+                backdropColor: 'transparent',
+                color: '#aaa'
+            }
+        }
+        }
+    }
+    });
+
+    // Show full ranking of all personality types
+    const rankedTypes = determinePersonalityType();
+    const typeRanking = document.getElementById('type-ranking');
+    typeRanking.innerHTML = '';
+
+    const maxScore = Math.max(...rankedTypes.map(t => t.score)) || 1; // avoid /0
+    rankedTypes.forEach(({ type, score }) => {
+        const percent = Math.round((score / maxScore) * 100);
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span>${type}</span>
+            <span>${percent}%</span>
+        `;
+        typeRanking.appendChild(li);
+    });
+
 }
 
 function showResults() {

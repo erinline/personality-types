@@ -1,28 +1,28 @@
 // Custom Personality Types
 window.personalityTypes = {
-    "Dynamic Pioneer": {
+    "The Joker": {
         icon: "🚀",
-        tagline: "The Bold Innovator",
-        description: "You're a natural trailblazer who thrives on change and innovation. You approach life with enthusiasm and aren't afraid to take risks to achieve your goals. Your spontaneous nature and leadership qualities make you excellent at inspiring others and driving progress.",
+        tagline: "DTP: Down to Play",
+        description: "You thrive on spontaneity and adventure, always ready to dive into new experiences",
         strengths: [
-            "Natural leadership and vision",
-            "Adaptable and resilient",
-            "Excellent at motivating others",
-            "Quick decision-making abilities",
-            "Innovative problem-solving"
+            "Got jokes",
+            "Keeping people's energy up",
+            "Finding the fun in any situation"
         ],
-        traits: {
-            "Spontaneity": 85,
-            "Social Energy": 80,
-            "Leadership": 90,
-            "Adventure": 85,
-            "Innovation": 88
-        }
+        growthAreas: [
+            "Can frustrate others who take the game seriously",
+            "Moves on too fast to learn from mistakes"
+        ],
+        traits: [
+            "interacting",
+            "light",
+            "breadth"
+        ]
     },
-    "Thoughtful Strategist": {
+    "The Storyteller": {
         icon: "🧠",
-        tagline: "The Wise Planner",
-        description: "You excel at seeing the big picture and creating comprehensive plans. Your analytical mind and careful consideration of all angles make you invaluable in complex situations. You prefer depth over breadth and quality over quantity in all aspects of life.",
+        tagline: "The craziest thing just happened",
+        description: "You see the narrative thread and enjoy capturing others imaginations",
         strengths: [
             "Strategic thinking and planning",
             "Deep analytical abilities",
@@ -30,18 +30,16 @@ window.personalityTypes = {
             "Strong problem-solving skills",
             "Reliable and consistent execution"
         ],
-        traits: {
-            "Planning": 90,
-            "Analysis": 85,
-            "Depth": 88,
-            "Stability": 82,
-            "Precision": 87
-        }
+        traits: [
+            "interacting",
+            "light",
+            "depth"
+        ]
     },
-    "Empathetic Connector": {
+    "The Competitor": {
         icon: "🤝",
-        tagline: "The Heart-Centered Leader",
-        description: "You have a natural gift for understanding and connecting with others. Your empathetic nature and strong communication skills make you excellent at building relationships and creating harmony. You lead through inspiration and genuine care for others.",
+        tagline: "Winning is the point",
+        description: "You love the game, but it's best when you're the best",
         strengths: [
             "Exceptional emotional intelligence",
             "Strong relationship-building skills",
@@ -49,18 +47,16 @@ window.personalityTypes = {
             "Inspiring and motivating presence",
             "Deep understanding of human nature"
         ],
-        traits: {
-            "Empathy": 92,
-            "Communication": 88,
-            "Harmony": 85,
-            "Intuition": 83,
-            "Collaboration": 90
-        }
+        traits: [
+            "interacting",
+            "serious",
+            "breadth"
+        ]
     },
-    "Balanced Harmonizer": {
+    "The Director": {
         icon: "⚖️",
-        tagline: "The Steady Diplomat",
-        description: "You bring stability and balance to every situation. Your ability to see multiple perspectives and find middle ground makes you an excellent mediator and team player. You value both innovation and tradition, creating sustainable solutions.",
+        tagline: "I have a plan for that",
+        description: "You are the organizer, the one who brings structure and clarity to chaos",
         strengths: [
             "Excellent mediation and diplomacy",
             "Balanced perspective on issues",
@@ -68,18 +64,16 @@ window.personalityTypes = {
             "Adaptable to different situations",
             "Creates inclusive environments"
         ],
-        traits: {
-            "Balance": 20,
-            "Diplomacy": 85,
-            "Adaptability": 82,
-            "Stability": 80,
-            "Inclusivity": 88
-        }
+        traits: [
+            "interacting",
+            "serious",
+            "depth"
+        ]
     },
-    "Creative Visionary": {
+    "The Explorer": {
         icon: "🎨",
-        tagline: "The Imaginative Innovator",
-        description: "You see possibilities where others see obstacles. Your creative mind and intuitive approach to problem-solving make you excellent at generating innovative solutions. You thrive in environments that allow for creative expression and exploration.",
+        tagline: "What's over there?",
+        description: "You thrive in unstructured environments and like to invent new ways to play",
         strengths: [
             "Exceptional creativity and imagination",
             "Innovative problem-solving approach",
@@ -87,18 +81,16 @@ window.personalityTypes = {
             "Excellent at seeing patterns and connections",
             "Natural artistic and aesthetic sense"
         ],
-        traits: {
-            "Creativity": 95,
-            "Innovation": 90,
-            "Intuition": 88,
-            "Flexibility": 85,
-            "Vision": 92
-        }
+        traits: [
+            "doing",
+            "light",
+            "breadth"
+        ]
     },
-    "Analytical Optimizer": {
+    "The Kinesthete": {
         icon: "📊",
-        tagline: "The Systematic Perfectionist",
-        description: "You excel at breaking down complex problems and finding efficient solutions. Your logical approach and attention to detail ensure high-quality outcomes. You thrive on continuous improvement and optimization in all areas of life.",
+        tagline: "New trick unlocked",
+        description: "You are always moving and have a knack for physical skills and coordination",
         strengths: [
             "Superior analytical and logical thinking",
             "Excellent attention to detail",
@@ -106,12 +98,44 @@ window.personalityTypes = {
             "Continuous improvement mindset",
             "High standards and quality focus"
         ],
-        traits: {
-            "Logic": 92,
-            "Precision": 90,
-            "Efficiency": 88,
-            "Quality": 85,
-            "Optimization": 93
-        }
+        traits: [
+            "doing",
+            "light",
+            "depth"
+        ]
+    },
+    "The Artist": {
+        icon: "📊",
+        tagline: "I see it differently",
+        description: "You have a need to express your unique vision through creation",
+        strengths: [
+            "Superior analytical and logical thinking",
+            "Excellent attention to detail",
+            "Strong systematic approach",
+            "Continuous improvement mindset",
+            "High standards and quality focus"
+        ],
+        traits: [
+            "doing",
+            "serious",
+            "breadth"
+        ]
+    },
+    "The Collector": {
+        icon: "📊",
+        tagline: "Gotta catch 'em all",
+        description: "You are driven to collect and complete, finding joy in the result of gathering",
+        strengths: [
+            "Superior analytical and logical thinking",
+            "Excellent attention to detail",
+            "Strong systematic approach",
+            "Continuous improvement mindset",
+            "High standards and quality focus"
+        ],
+        traits: [
+            "doing",
+            "serious",
+            "depth"
+        ]
     }
 };

@@ -6,6 +6,7 @@
     <title>Personality Compass - Discover Your Type</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -20,6 +21,9 @@
                     <li><span class="check-icon">✓</span> Learn your play rankings</li>
                 </ul>
                 <button id="start-test" class="primary-btn">Begin Assessment</button>
+                <p class="disclaimer">
+                    This assessment is not scientifically validated. It’s my own interpretation inspired by the <strong>play types framework by Dr. Stuart Brown</strong>.
+                </p>
             </div>
         </div>
 
@@ -43,16 +47,14 @@
 
                     <div class="slider-wrapper">
                         <div class="slider-reveal-overlay"></div>
-                        <input type="range" min="1" max="7" step="1" class="slider" id="answer-scale">
+                        <input type="range" min="1" max="5" class="slider" id="answer-scale">
                     </div>
                     
                     <div class="scale-values">
                         <span>Strongly</span>
-                        <span>Moderately</span>
-                        <span>Slightly</span>
+                        <span>Somewhat</span>
                         <span>Neutral</span>
-                        <span>Slightly</span>
-                        <span>Moderately</span>
+                        <span>Somewhat</span>
                         <span>Strongly</span>
                     </div>
                 </div>
@@ -88,6 +90,17 @@
                         <h3>Key Strengths</h3>
                         <ul id="strengths-list" class="strengths-list"></ul>
                     </div>
+
+                    <div class="chart-section">
+                        <h3>Your Trait Profile</h3>
+                        <canvas id="trait-chart" height="100"></canvas>
+                    </div>
+
+                    <div class="ranking-section">
+                        <h3>Your Full Type Match Ranking</h3>
+                        <ul id="type-ranking" class="type-ranking"></ul>
+                    </div>
+
                 </div>
 
                 <div class="action-buttons">
