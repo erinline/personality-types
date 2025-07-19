@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Compass - Discover Your Type</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <h1 class="title">Personality Compass</h1>
+                <p class="subtitle">Discover your unique personality type through our comprehensive assessment</p>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🧭</div>
+                        <span>Navigate your inner world</span>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <span>Quick 5-minute assessment</span>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <span>Personalized insights</span>
+                    </div>
+                </div>
+                <button id="start-test" class="primary-btn">Begin Assessment</button>
+            </div>
+        </div>
+
+        <!-- Test Screen -->
+        <div id="test-screen" class="screen">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <span id="progress-text" class="progress-text">Question 1 of 20</span>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text" class="question-text"></h2>
+                
+                <div class="scale-container">
+                    <div class="scale-labels">
+                        <span id="left-label" class="scale-label left"></span>
+                        <span id="right-label" class="scale-label right"></span>
+                    </div>
+
+                    <div class="slider-wrapper">
+                        <div class="slider-reveal-overlay"></div>
+                        <input type="range" min="1" max="7" step="1" class="slider" id="answer-scale">
+                    </div>
+                    
+                    <div class="scale-values">
+                        <span>Strongly</span>
+                        <span>Moderately</span>
+                        <span>Slightly</span>
+                        <span>Neutral</span>
+                        <span>Slightly</span>
+                        <span>Moderately</span>
+                        <span>Strongly</span>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button id="prev-btn" class="secondary-btn" disabled>Previous</button>
+                    <button id="next-btn" class="primary-btn">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-content">
+                <div class="result-header">
+                    <div id="personality-icon" class="personality-icon"></div>
+                    <h1 id="personality-type" class="personality-type"></h1>
+                    <p id="personality-tagline" class="personality-tagline"></p>
+                </div>
+
+                <div class="result-details">
+                    <div class="trait-scores">
+                        <h3>Your Personality Dimensions</h3>
+                        <div id="trait-bars" class="trait-bars"></div>
+                    </div>
+
+                    <div class="description-section">
+                        <h3>About Your Type</h3>
+                        <p id="personality-description" class="personality-description"></p>
+                    </div>
+
+                    <div class="strengths-section">
+                        <h3>Key Strengths</h3>
+                        <ul id="strengths-list" class="strengths-list"></ul>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="retake-btn" class="secondary-btn">Retake Test</button>
+                    <button id="share-btn" class="primary-btn">Share Results</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
