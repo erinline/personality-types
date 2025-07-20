@@ -184,8 +184,9 @@ function displayPersonalityResult(typeName) {
             label: 'Your Trait Profile',
             data: traitValues,
             fill: true,
-            backgroundColor: 'rgba(26, 188, 156, 0.2)', // translucent teal
+            backgroundColor: 'rgba(26, 188, 156, 0.3)',
             borderColor: '#1abc9c',
+            borderWidth: 2,
             pointBackgroundColor: '#1abc9c',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
@@ -213,22 +214,19 @@ function displayPersonalityResult(typeName) {
             beginAtZero: true,
             suggestedMax: 5, // or 10 if unnormalized
             angleLines: {
-            color: 'rgba(0, 0, 0, 0.05)'
+                color: 'rgba(255, 255, 255, 0.1)'
             },
             grid: {
-            color: 'rgba(0, 0, 0, 0.05)'
+                color: 'rgba(255, 255, 255, 0.08)'
             },
             pointLabels: {
-            font: {
-                size: 14,
-                weight: '500'
-            },
-            color: '#444'
+                font: { size: 14, weight: '500' },
+                color: '#eee'
             },
             ticks: {
                 stepSize: 1,
                 backdropColor: 'transparent',
-                color: '#aaa'
+                color: '#ccc'
             }
         }
         }
